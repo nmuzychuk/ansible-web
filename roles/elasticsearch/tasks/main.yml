@@ -1,0 +1,10 @@
+---
+- apt_key: url=https://packages.elastic.co/GPG-KEY-elasticsearch
+
+- copy: src=elasticsearch-2.x.list dest=/etc/apt/sources.list.d/elasticsearch-2.x.list
+
+- apt: name=elasticsearch update_cache=yes
+
+- service: name=elasticsearch state=started
+
+- service: name=elasticsearch enabled=yes

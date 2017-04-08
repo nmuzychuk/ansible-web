@@ -1,0 +1,13 @@
+---
+- debconf: name='mysql-server' question='mysql-server/root_password' value='{{mysql_root_pass | quote}}' vtype='password'
+
+- debconf: name='mysql-server' question='mysql-server/root_password_again' value='{{mysql_root_pass | quote}}' vtype='password'
+
+- apt: name={{ item }} update_cache=yes
+  with_items:
+    - mysql-server
+    - libmysqlclient-dev
+
+- service: name=mysql state=started
+
+- service: name=mysql enabled=yes

@@ -1,0 +1,13 @@
+---
+- apt: name=nginx
+
+- template: src=site.conf dest=/etc/nginx/sites-available/site.conf
+  notify: restart nginx
+
+- file: src=/etc/nginx/sites-available/site.conf dest=/etc/nginx/sites-enabled/site.conf state=link
+  notify: restart nginx
+
+- file: path=/etc/nginx/sites-available/default state=absent
+  notify: restart nginx
+
+- service: name=nginx enabled=yes
