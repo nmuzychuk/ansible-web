@@ -1,0 +1,5 @@
+language: python
+install:
+  - pip install ansible
+script:
+  - ansible-playbook -i staging site.yml --syntax-check
